@@ -3,11 +3,14 @@
 
 AGame::AGame() :
 window( sf::VideoMode( 640, 480 ), "SFML Airstrike" ) {
+    this->window.setVerticalSyncEnabled( true );
     this->player            = sf::CircleShape();
+    this->time_per_frame    = sf::Time( sf::seconds( 1.0f / 60.0f ) );
     this->is_moving_up      = false;
     this->is_moving_down    = false;
     this->is_moving_left    = false;
     this->is_moving_right   = false;
+    this->player_speed      = 200.0f;
 
     this->player.setRadius( 40.0f );
     this->player.setPosition( 100.0f, 100.0f );
@@ -16,9 +19,16 @@ window( sf::VideoMode( 640, 480 ), "SFML Airstrike" ) {
 
 void
 AGame::Run() {
+    sf::Clock clock;
+    sf::Time time_since_last_update = sf::Time::Zero;
     while ( this->window.isOpen() ) {
         this->ProcessEvents();
-        this->Update();
+        time_since_last_update += clock.restart();
+        while ( time_since_last_update > this->time_per_frame ) {
+            time_since_last_update -= this->time_per_frame;
+            this->ProcessEvents();
+            this->Update( this->time_per_frame );
+        }
         this->Render();
     }
 }
@@ -38,21 +48,21 @@ AGame::ProcessEvents() {
 }
 
 void
-AGame::Update() {
+AGame::Update( const sf::Time& dt ) {
     sf::Vector2f movement( 0.0f, 0.0f );
     if ( this->is_moving_up ) {
-        movement.y -= 1.0f;
+        movement.y -= this->player_speed;
     }
     if ( this->is_moving_down ) {
-        movement.y += 1.0f;
+        movement.y += this->player_speed;
     }
     if ( this->is_moving_left ) {
-        movement.x -= 1.0f;
+        movement.x -= this->player_speed;
     }
     if ( this->is_moving_right ) {
-        movement.x += 1.0f;
+        movement.x += this->player_speed;
     }
-    this->player.move( movement );
+    this->player.move( movement * dt.asSeconds() );
 }
 
 void

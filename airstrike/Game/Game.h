@@ -13,13 +13,15 @@ public:
 private:
     sf::RenderWindow    window;
     sf::CircleShape     player;
+    sf::Time            time_per_frame;
     bool                is_moving_up;
     bool                is_moving_down;
     bool                is_moving_left;
     bool                is_moving_right;
+    float               player_speed;
 
     void                ProcessEvents();
-    void                Update();
+    void                Update( const sf::Time& dt );
     void                Render();
     void                HandlePlayerInput( const sf::Keyboard::Key& key, const bool is_pressed );
 };
