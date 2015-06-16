@@ -1,23 +1,8 @@
 
-#include <SFML/Graphics.hpp>
+#include <Game/Game.h>
 
 int main() {
-    sf::RenderWindow window( sf::VideoMode( 640, 480 ), "AirStrike" );
-    sf::CircleShape shape;
-    shape.setRadius( 40.0 );
-    shape.setPosition( 100.0, 100.0 );
-    shape.setFillColor( sf::Color::Cyan );
-
-    while ( window.isOpen() ) {
-        sf::Event event;
-        while ( window.pollEvent( event ) ) {
-            if ( event.type == sf::Event::Closed ) {
-                window.close();
-            }
-        }
-        window.clear();
-        window.draw( shape );
-        window.display();
-    }
+    AGame game;
+    game.Run();
     return 0;
 }

@@ -4,7 +4,9 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    Game/Game.cpp \
+    Game/Game.h
 
 TARGET = airstrike
 
