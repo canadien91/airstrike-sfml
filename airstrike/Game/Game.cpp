@@ -4,7 +4,8 @@
 AGame::AGame() :
 window( sf::VideoMode( 640, 480 ), "SFML Airstrike" ) {
     this->window.setVerticalSyncEnabled( true );
-    this->player            = sf::CircleShape();
+    this->texture           = sf::Texture();
+    this->player            = sf::Sprite();
     this->time_per_frame    = sf::Time( sf::seconds( 1.0f / 60.0f ) );
     this->is_moving_up      = false;
     this->is_moving_down    = false;
@@ -12,9 +13,11 @@ window( sf::VideoMode( 640, 480 ), "SFML Airstrike" ) {
     this->is_moving_right   = false;
     this->player_speed      = 200.0f;
 
-    this->player.setRadius( 40.0f );
+    if ( !this->texture.loadFromFile( "Media/Textures/Eagle.png" ) ) {
+        // Handle loading error;
+    }
+    this->player.setTexture( this->texture );
     this->player.setPosition( 100.0f, 100.0f );
-    this->player.setFillColor( sf::Color::Cyan );
 }
 
 void
