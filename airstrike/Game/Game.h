@@ -11,20 +11,28 @@ public:
     void Run();
 
 private:
-    sf::RenderWindow    window;
-    sf::Texture         texture;
-    sf::Sprite          player;
-    sf::Time            time_per_frame;
-    bool                is_moving_up;
-    bool                is_moving_down;
-    bool                is_moving_left;
-    bool                is_moving_right;
-    float               player_speed;
+    static const float      PLAYER_SPEED;
+    static const sf::Time   TIME_PER_FRAME;
 
-    void                ProcessEvents();
-    void                Update( const sf::Time& dt );
-    void                Render();
-    void                HandlePlayerInput( const sf::Keyboard::Key& key, const bool is_pressed );
+    sf::RenderWindow        window;
+    sf::Texture             texture;
+    sf::Sprite              player;
+    sf::Font                font;
+
+    sf::Text                statistics_text;
+    sf::Time                statistics_update_time;
+    std::size_t             statistics_num_frames;
+
+    bool                    is_moving_up;
+    bool                    is_moving_down;
+    bool                    is_moving_left;
+    bool                    is_moving_right;
+
+    void                    ProcessEvents();
+    void                    Update( const sf::Time& dt );
+    void                    UpdateStatistics( const sf::Time& dt );
+    void                    Render();
+    void                    HandlePlayerInput( const sf::Keyboard::Key& key, const bool is_pressed );
 };
 
 #endif

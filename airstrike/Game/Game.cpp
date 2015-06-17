@@ -1,23 +1,33 @@
 
 #include "Game.h"
 
+const float     AGame::PLAYER_SPEED     = 200.0f;
+const sf::Time  AGame::TIME_PER_FRAME   = sf::Time( sf::seconds( 1.0f / 60.0f ) );
+
 AGame::AGame() :
 window( sf::VideoMode( 640, 480 ), "SFML Airstrike" ) {
     this->window.setVerticalSyncEnabled( true );
-    this->texture           = sf::Texture();
-    this->player            = sf::Sprite();
-    this->time_per_frame    = sf::Time( sf::seconds( 1.0f / 60.0f ) );
-    this->is_moving_up      = false;
-    this->is_moving_down    = false;
-    this->is_moving_left    = false;
-    this->is_moving_right   = false;
-    this->player_speed      = 200.0f;
+    this->texture                   = sf::Texture();
+    this->player                    = sf::Sprite();
+    this->font                      = sf::Font();
+    this->statistics_text           = sf::Text();
+    this->statistics_update_time    = sf::Time();
+    this->statistics_num_frames     = 0;
+    this->is_moving_up              = false;
+    this->is_moving_down            = false;
+    this->is_moving_left            = false;
+    this->is_moving_right           = false;
 
     if ( !this->texture.loadFromFile( "Media/Textures/Eagle.png" ) ) {
         // Handle loading error;
     }
     this->player.setTexture( this->texture );
     this->player.setPosition( 100.0f, 100.0f );
+
+    this->font.loadFromFile( "Media/Sansation.ttf" );
+    this->statistics_text.setFont( font );
+    this->statistics_text.setPosition( 5.0f, 5.0f );
+    this->statistics_text.setCharacterSize( 10 );
 }
 
 void
@@ -25,13 +35,14 @@ AGame::Run() {
     sf::Clock clock;
     sf::Time time_since_last_update = sf::Time::Zero;
     while ( this->window.isOpen() ) {
-        this->ProcessEvents();
-        time_since_last_update += clock.restart();
-        while ( time_since_last_update > this->time_per_frame ) {
-            time_since_last_update -= this->time_per_frame;
+        sf::Time elapsed_time = clock.restart();
+        time_since_last_update += elapsed_time;
+        while ( time_since_last_update > TIME_PER_FRAME ) {
+            time_since_last_update -= TIME_PER_FRAME;
             this->ProcessEvents();
-            this->Update( this->time_per_frame );
+            this->Update( TIME_PER_FRAME );
         }
+        this->UpdateStatistics( elapsed_time );
         this->Render();
     }
 }
@@ -54,24 +65,42 @@ void
 AGame::Update( const sf::Time& dt ) {
     sf::Vector2f movement( 0.0f, 0.0f );
     if ( this->is_moving_up ) {
-        movement.y -= this->player_speed;
+        movement.y -= PLAYER_SPEED;
     }
     if ( this->is_moving_down ) {
-        movement.y += this->player_speed;
+        movement.y += PLAYER_SPEED;
     }
     if ( this->is_moving_left ) {
-        movement.x -= this->player_speed;
+        movement.x -= PLAYER_SPEED;
     }
     if ( this->is_moving_right ) {
-        movement.x += this->player_speed;
+        movement.x += PLAYER_SPEED;
     }
     this->player.move( movement * dt.asSeconds() );
+}
+
+void
+AGame::UpdateStatistics( const sf::Time& dt ) {
+    this->statistics_update_time += dt;
+    this->statistics_num_frames += 1;
+
+    if ( this->statistics_update_time >= sf::seconds( 1.0f ) ) {
+        this->statistics_text.setString(
+            "FPS = " + std::to_string( this->statistics_num_frames ) + "\n" +
+            "Time / Update = " + std::to_string(
+                this->statistics_update_time.asMicroseconds() / this->statistics_num_frames
+            ) + "us"
+        );
+        this->statistics_update_time -= sf::seconds( 1.0f );
+        this->statistics_num_frames = 0;
+    }
 }
 
 void
 AGame::Render() {
     this->window.clear();
     this->window.draw( this->player );
+    this->window.draw( this->statistics_text );
     this->window.display();
 }
 
