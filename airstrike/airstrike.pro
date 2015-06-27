@@ -4,9 +4,15 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
+HEADERS += \
+    ResourceHolder/ResourceHolder.hpp \
+    ResourceHolder/ResourceHolder.inl \
+    ResourceHolder/ResourceIdentifiers.h \
+    Game/Game.h \
+
+
 SOURCES += main.cpp \
     Game/Game.cpp \
-    Game/Game.h
 
 TARGET = airstrike
 
