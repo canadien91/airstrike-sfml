@@ -5,13 +5,17 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 HEADERS += \
+    Aircraft/Aircraft.h \
+    Entity/Entity.h \
+    Game/Game.h \
     ResourceHolder/ResourceHolder.hpp \
     ResourceHolder/ResourceHolder.inl \
     ResourceHolder/ResourceIdentifiers.h \
-    Game/Game.h \
 
 
 SOURCES += main.cpp \
+    Aircraft/Aircraft.cpp \
+    Entity/Entity.cpp \
     Game/Game.cpp \
 
 TARGET = airstrike
