@@ -11,12 +11,14 @@ HEADERS += \
     ResourceHolder/ResourceHolder.hpp \
     ResourceHolder/ResourceHolder.inl \
     ResourceHolder/ResourceIdentifiers.h \
+    SceneNode/SceneNode.h \
 
 
 SOURCES += main.cpp \
     Aircraft/Aircraft.cpp \
     Entity/Entity.cpp \
     Game/Game.cpp \
+    SceneNode/SceneNode.cpp \
 
 TARGET = airstrike
 
