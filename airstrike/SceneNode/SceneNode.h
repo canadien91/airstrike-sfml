@@ -7,7 +7,12 @@
 #include <memory>
 #include <vector>
 
-class ASceneNode {
+#include <SFML/Graphics.hpp>
+
+class ASceneNode :
+    public sf::Transformable,
+    public sf::Drawable,
+    private sf::NonCopyable {
 public:
     typedef std::unique_ptr<ASceneNode> SNPointer_t;
     ASceneNode();
@@ -20,6 +25,8 @@ private:
     ASceneNode*                 parent;
 
     bool                        IsNodeRequired( SNPointer_t& snp, const ASceneNode& node );
+    virtual void                draw( sf::RenderTarget& target, sf::RenderStates states ) const;
+    virtual void                DrawCurrent( sf::RenderTarget& target, sf::RenderStates states ) const;
 };
 
 #endif

@@ -32,3 +32,17 @@ bool
 ASceneNode::IsNodeRequired( SNPointer_t& snp, const ASceneNode& node ) {
     return snp.get() == &node;
 }
+
+void
+ASceneNode::draw( sf::RenderTarget& target, sf::RenderStates states ) const {
+    states.transform *= this->getTransform();
+
+    this->DrawCurrent( target, states );
+    for( const SNPointer_t& child : this->children ) {
+        child->draw( target, states );
+    }
+}
+
+void
+ASceneNode::DrawCurrent( sf::RenderTarget& target, sf::RenderStates states ) const {
+}

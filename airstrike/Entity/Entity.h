@@ -2,9 +2,9 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
-#include <SFML/Graphics.hpp>
+#include "SceneNode/SceneNode.h"
 
-class AnEntity {
+class AnEntity : ASceneNode {
 public:
     void            SetVelocity( const sf::Vector2f& velocity );
     void            SetVelocity( float vx, float vy );
