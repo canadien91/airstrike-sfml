@@ -11,13 +11,14 @@ public:
         Raptor,
     };
 
-    explicit AnAircraft( Type_t type );
+    explicit AnAircraft( Type_t type, const ATextureHolder_t& textures );
 
 private:
-    Type_t          type;
-    sf::Sprite      sprite;
+    Type_t              type;
+    sf::Sprite          sprite;
 
-    virtual void    DrawCurrent( sf::RenderTarget& target, sf::RenderStates states ) const;
+    virtual void        DrawCurrent( sf::RenderTarget& target, sf::RenderStates states ) const;
+    Textures_ns::Id_t   GetTextureId() const;
 };
 
 #endif

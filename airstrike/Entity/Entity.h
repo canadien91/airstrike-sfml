@@ -3,6 +3,7 @@
 #define __ENTITY_H__
 
 #include "SceneNode/SceneNode.h"
+#include "ResourceHolder/ResourceIdentifiers.h"
 
 class AnEntity : ASceneNode {
 public:

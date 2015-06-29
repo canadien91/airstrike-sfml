@@ -17,5 +17,5 @@ namespace Fonts_ns {
     };
 }
 
-typedef AResourceHolder<sf::Texture, Textures_ns::Id_t> ATextureHolder;
+typedef AResourceHolder<sf::Texture, Textures_ns::Id_t> ATextureHolder_t;
 #endif

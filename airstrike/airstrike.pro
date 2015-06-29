@@ -29,3 +29,4 @@ INCLUDEPATH += "/usr/include/SFML/"
 DEPENDPATH += "/usr/include/SFML/"
 
 QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -Wunused-parameter
