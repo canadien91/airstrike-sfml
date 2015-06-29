@@ -12,6 +12,7 @@ HEADERS += \
     ResourceHolder/ResourceHolder.inl \
     ResourceHolder/ResourceIdentifiers.h \
     SceneNode/SceneNode.h \
+    SpriteNode/SpriteNode.h \
 
 
 SOURCES += main.cpp \
@@ -19,6 +20,7 @@ SOURCES += main.cpp \
     Entity/Entity.cpp \
     Game/Game.cpp \
     SceneNode/SceneNode.cpp \
+    SpriteNode/SpriteNode.cpp
 
 TARGET = airstrike
 
