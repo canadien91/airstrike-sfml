@@ -24,6 +24,26 @@ window( window ) {
 }
 
 void
+AWorld::Draw() {
+    this->window.setView( this->world_view );
+    this->window.draw( this->scene_graph );
+}
+
+void
+AWorld::Update( const sf::Time& dt ) {
+    this->world_view.move( 0.0f, this->scroll_speed * dt.asSeconds() );
+
+    sf::Vector2f position = this->player_aircraft->getPosition();
+    sf::Vector2f velocity = this->player_aircraft->GetVelocity();
+
+    if ( this->IsPositionAtBounds( position ) ) {
+        velocity.x = -velocity.x;
+        this->player_aircraft->SetVelocity( velocity );
+    }
+    this->scene_graph.Update( dt );
+}
+
+void
 AWorld::LoadTextures() {
     this->textures.LoadResourceFromFile( Textures_ns::Eagle, "Media/Textures/Eagle.png" );
     this->textures.LoadResourceFromFile( Textures_ns::Raptor, "Media/Textures/Raptor.png" );
@@ -60,4 +80,11 @@ AWorld::BuildScene() {
     std::unique_ptr<AnAircraft> right_escort( new AnAircraft( AnAircraft::Raptor, this->textures ) );
     right_escort->setPosition( 80.0f, 50.0f );
     this->player_aircraft->AttachChild( std::move( right_escort ) );
+}
+
+bool
+AWorld::IsPositionAtBounds( const sf::Vector2f& pos ) {
+    bool at_left_bound = pos.x <= this->world_bounds.left + 150;
+    bool at_right_bound = pos.x >= this->world_bounds.left + this->world_bounds.width - 150;
+    return at_left_bound || at_right_bound;
 }

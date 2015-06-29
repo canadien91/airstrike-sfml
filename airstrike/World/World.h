@@ -31,6 +31,7 @@ private:
 
     void LoadTextures();
     void BuildScene();
+    bool IsPositionAtBounds( const sf::Vector2f& pos );
 };
 
 #endif
