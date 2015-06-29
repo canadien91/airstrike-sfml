@@ -1,8 +1,14 @@
 
+#include <iostream>
+
 #include <Game/Game.h>
 
 int main() {
-    AGame game;
-    game.Run();
+    try {
+        AGame game;
+        game.Run();
+    } catch ( std::exception& e ) {
+        std::cout << "\nEXCEPTION: " << e.what() << std::endl;
+    }
     return 0;
 }

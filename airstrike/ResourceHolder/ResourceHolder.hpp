@@ -26,8 +26,6 @@ public:
 
 private:
     std::map<Identifier, Resource*> resource_map;
-
-    void InsertResource( Identifier id, std::unique_ptr<Resource> resource );
 };
 
 #include "ResourceHolder.inl"

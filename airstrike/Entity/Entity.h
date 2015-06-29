@@ -5,7 +5,7 @@
 #include "SceneNode/SceneNode.h"
 #include "ResourceHolder/ResourceIdentifiers.h"
 
-class AnEntity : ASceneNode {
+class AnEntity : public ASceneNode {
 public:
     void            SetVelocity( const sf::Vector2f& velocity );
     void            SetVelocity( float vx, float vy );
