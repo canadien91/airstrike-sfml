@@ -11,6 +11,7 @@ world( this->window ) {
     this->statistics_text           = sf::Text();
     this->statistics_update_time    = sf::Time();
     this->statistics_num_frames     = 0;
+    this->is_paused                 = false;
 
     this->font.loadFromFile( "Media/Sansation.ttf" );
     this->statistics_text.setFont( font );
@@ -28,7 +29,9 @@ AGame::Run() {
         while ( time_since_last_update > TIME_PER_FRAME ) {
             time_since_last_update -= TIME_PER_FRAME;
             this->ProcessEvents();
-            this->Update( TIME_PER_FRAME );
+            if ( !this->is_paused ) {
+                this->Update( TIME_PER_FRAME );
+            }
         }
         this->UpdateStatistics( elapsed_time );
         this->Render();
@@ -41,6 +44,10 @@ AGame::ProcessEvents() {
     while ( this->window.pollEvent( event) ) {
         if ( event.type == sf::Event::Closed ) {
             this->window.close();
+        } else if ( event.type == sf::Event::GainedFocus ) {
+            this->is_paused = false;
+        } else if ( event.type == sf::Event::LostFocus ) {
+            this->is_paused = true;
         }
     }
 }
@@ -75,8 +82,4 @@ AGame::Render() {
     this->window.setView( this->window.getDefaultView() );
     this->window.draw( this->statistics_text );
     this->window.display();
-}
-
-void
-AGame::HandlePlayerInput( const sf::Keyboard::Key& key, const bool is_pressed ){
 }

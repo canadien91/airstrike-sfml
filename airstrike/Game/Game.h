@@ -12,6 +12,7 @@ public:
 
 private:
     static const sf::Time   TIME_PER_FRAME;
+    bool                    is_paused;
 
     sf::RenderWindow        window;
     AWorld                  world;
@@ -25,7 +26,6 @@ private:
     void                    Update( const sf::Time& dt );
     void                    UpdateStatistics( const sf::Time& dt );
     void                    Render();
-    void                    HandlePlayerInput( const sf::Keyboard::Key& key, const bool is_pressed );
 };
 
 #endif
