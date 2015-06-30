@@ -6,6 +6,8 @@ CONFIG -= qt
 
 HEADERS += \
     Aircraft/Aircraft.h \
+    Command/Category.h \
+    Command/Command.h \
     Entity/Entity.h \
     Game/Game.h \
     ResourceHolder/ResourceHolder.hpp \
