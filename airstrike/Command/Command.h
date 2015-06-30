@@ -4,7 +4,7 @@
 
 #include <functional>
 
-#include <SFML/System/Time.h>
+#include <SFML/System/Time.hpp>
 
 #include <SceneNode/SceneNode.h>
 

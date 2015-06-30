@@ -8,6 +8,7 @@ HEADERS += \
     Aircraft/Aircraft.h \
     Command/Category.h \
     Command/Command.h \
+    CommandQueue/CommandQueue.h \
     Entity/Entity.h \
     Game/Game.h \
     ResourceHolder/ResourceHolder.hpp \
@@ -20,6 +21,7 @@ HEADERS += \
 
 SOURCES += main.cpp \
     Aircraft/Aircraft.cpp \
+    CommandQueue/CommandQueue.cpp \
     Entity/Entity.cpp \
     Game/Game.cpp \
     SceneNode/SceneNode.cpp \
