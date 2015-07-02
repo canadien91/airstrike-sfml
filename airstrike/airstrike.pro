@@ -21,6 +21,7 @@ HEADERS += \
 
 SOURCES += main.cpp \
     Aircraft/Aircraft.cpp \
+    Command/Command.cpp \
     CommandQueue/CommandQueue.cpp \
     Entity/Entity.cpp \
     Game/Game.cpp \

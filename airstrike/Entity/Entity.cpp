@@ -19,6 +19,17 @@ AnEntity::GetVelocity() const {
 }
 
 void
+AnEntity::Accelerate( const sf::Vector2f& velocity ) {
+    this->velocity += velocity;
+}
+
+void
+AnEntity::Accelerate( const float vx, const float vy ) {
+    this->velocity.x += vx;
+    this->velocity.y += vy;
+}
+
+void
 AnEntity::UpdateCurrent( const sf::Time& dt ) {
     this->move( this->velocity * dt.asSeconds() );
 }
