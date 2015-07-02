@@ -7,6 +7,7 @@
 #include <SFML/System/Time.hpp>
 
 #include <SceneNode/SceneNode.h>
+#include "Category.h"
 
 class ACommand {
 public:
