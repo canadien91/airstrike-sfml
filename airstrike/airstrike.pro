@@ -6,6 +6,7 @@ CONFIG -= qt
 
 HEADERS += \
     Aircraft/Aircraft.h \
+    AircraftMover/AircraftMover.h \
     Command/Category.h \
     Command/Command.h \
     CommandQueue/CommandQueue.h \
@@ -21,6 +22,7 @@ HEADERS += \
 
 SOURCES += main.cpp \
     Aircraft/Aircraft.cpp \
+    AircraftMover/AircraftMover.cpp \
     Command/Command.cpp \
     CommandQueue/CommandQueue.cpp \
     Entity/Entity.cpp \
